@@ -1,0 +1,82 @@
+# Example experiment configuration for quick testing
+# This uses smaller values for faster execution
+
+# Data settings
+data:
+  zip_path: "/content/aclImdb.zip"
+  data_dir: null
+  sample_size: 1000  # Small sample for quick testing
+  preprocess: true
+  random_seed: 42
+
+# Cross-validation settings (reduced for quick testing)
+cross_validation:
+  n_splits: 3  # Reduced from 5
+  n_repeats: 2  # Reduced from 4 (total = 6 evaluations instead of 20)
+  random_seeds: [42, 123]
+
+# Embedding configurations
+embeddings:
+  tfidf:
+    max_features: 2000  # Reduced from 5000
+    ngram_range: [1, 2]
+    min_df: 2
+    max_df: 0.95
+  
+  word2vec_cbow:
+    vector_size: 50  # Reduced from 100
+    window: 5
+    min_count: 2
+    workers: 4
+    sg: 0
+    epochs: 5  # Reduced from 10
+  
+  word2vec_skipgram:
+    vector_size: 50
+    window: 5
+    min_count: 2
+    workers: 4
+    sg: 1
+    epochs: 5
+  
+  bert:
+    max_length: 128  # Reduced from 512
+    batch_size: 8
+    pooling: "cls"
+    models:
+      - "distilbert-base-uncased"  # Smaller/faster BERT variant
+
+# Model configurations
+models:
+  logreg:
+    max_iter: 500  # Reduced from 1000
+    random_state: 42
+    solver: "lbfgs"
+    C: 1.0
+  
+  randomforest:
+    n_estimators: 50  # Reduced from 100
+    random_state: 42
+    max_depth: null
+  
+  adaboost:
+    n_estimators: 30  # Reduced from 50
+    random_state: 42
+    learning_rate: 1.0
+  
+  lstm:
+    hidden_dim: 64  # Reduced from 128
+    num_layers: 1  # Reduced from 2
+    dropout: 0.3
+    bidirectional: true
+    learning_rate: 0.001
+    batch_size: 32
+    epochs: 5  # Reduced from 10
+    verbose: false
+
+# Output settings
+output:
+  results_dir: "reports/results"
+  figures_dir: "reports/figures"
+  save_checkpoints: false
+  checkpoint_dir: "models/checkpoints"

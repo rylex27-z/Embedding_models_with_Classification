@@ -1,0 +1,101 @@
+# Default configuration for IMDB sentiment classification experiments
+
+# Data settings
+data:
+  # Path to IMDB dataset (update this in Colab)
+  zip_path: "/content/aclImdb.zip"  # or "/content/drive/MyDrive/data/aclImdb.zip"
+  data_dir: null  # Alternative: path to extracted aclImdb directory
+  sample_size: null  # Set to integer (e.g., 1000) for quick testing, null for full dataset
+  preprocess: true  # Apply basic text preprocessing
+  random_seed: 42
+
+# Cross-validation settings
+cross_validation:
+  n_splits: 5  # Number of folds per repeat
+  n_repeats: 4  # Number of repeats with different seeds (total = n_splits × n_repeats = 20)
+  random_seeds: [42, 123, 456, 789]  # Seeds for each repeat
+
+# Embedding configurations
+embeddings:
+  tfidf:
+    max_features: 5000
+    ngram_range: [1, 2]
+    min_df: 2
+    max_df: 0.95
+  
+  word2vec_cbow:
+    vector_size: 100
+    window: 5
+    min_count: 5
+    workers: 4
+    sg: 0  # 0 = CBOW
+    epochs: 10
+  
+  word2vec_skipgram:
+    vector_size: 100
+    window: 5
+    min_count: 5
+    workers: 4
+    sg: 1  # 1 = Skip-gram
+    epochs: 10
+  
+  bert:
+    # Default BERT config
+    max_length: 512
+    batch_size: 8
+    pooling: "cls"  # "cls" or "mean"
+    
+    # Available models (select via variant parameter)
+    models:
+      - "bert-base-uncased"
+      - "roberta-base"
+      - "distilbert-base-uncased"
+      - "albert-base-v2"
+
+# Model configurations
+models:
+  logreg:
+    max_iter: 1000
+    random_state: 42
+    solver: "lbfgs"
+    C: 1.0
+  
+  randomforest:
+    n_estimators: 100
+    random_state: 42
+    max_depth: null
+    min_samples_split: 2
+    min_samples_leaf: 1
+  
+  adaboost:
+    n_estimators: 50
+    random_state: 42
+    learning_rate: 1.0
+  
+  lstm:
+    hidden_dim: 128
+    num_layers: 2
+    dropout: 0.3
+    bidirectional: true
+    learning_rate: 0.001
+    batch_size: 32
+    epochs: 10
+    verbose: false
+
+# Resource limits for Colab
+resource_limits:
+  # For BERT embeddings
+  bert_max_samples_for_testing: 1000  # Sample size for quick BERT testing
+  bert_batch_size: 8  # Reduce if OOM
+  bert_max_length: 256  # Reduce from 512 if OOM
+  
+  # For deep learning models
+  lstm_batch_size: 32
+  lstm_epochs: 10
+
+# Output settings
+output:
+  results_dir: "reports/results"
+  figures_dir: "reports/figures"
+  save_checkpoints: false  # Set to true to save model checkpoints (not recommended for large models)
+  checkpoint_dir: "models/checkpoints"

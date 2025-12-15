@@ -1,0 +1,88 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb_checkpoints
+
+# Data files - DO NOT COMMIT RAW DATASETS
+data/aclImdb/
+data/aclImdb.zip
+data/*.zip
+data/*.tar.gz
+data/raw/
+data/processed/*.pkl
+data/processed/*.npy
+data/processed/*.h5
+
+# Model checkpoints - DO NOT COMMIT BY DEFAULT
+models/checkpoints/
+*.pth
+*.pt
+*.h5
+*.hdf5
+*.ckpt
+*.bin
+# Allow optional model exports if explicitly needed
+!models/final/*.pth
+
+# Large embedding files
+*.vec
+*.txt.gz
+embeddings_cache/
+.cache/
+
+# Results - commit CSVs and MD but not large binaries
+reports/results/*.pkl
+reports/figures/*.png
+reports/figures/*.pdf
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
+.tmp/
+
+# Environment
+.env
+.envrc
+
+# OS
+Thumbs.db
