@@ -65,7 +65,7 @@ def save_results_csv(results: pd.DataFrame, filename: str, results_dir: Optional
         Path to saved file
     """
     if results_dir is None:
-        results_dir = get_project_root() / "reports" / "results"
+        results_dir = str(get_project_root() / "reports" / "results")
     
     ensure_dir(results_dir)
     filepath = os.path.join(results_dir, filename)
@@ -77,7 +77,7 @@ def save_results_csv(results: pd.DataFrame, filename: str, results_dir: Optional
 def load_results_csv(filename: str, results_dir: Optional[str] = None) -> pd.DataFrame:
     """Load results DataFrame from CSV."""
     if results_dir is None:
-        results_dir = get_project_root() / "reports" / "results"
+        results_dir = str(get_project_root() / "reports" / "results")
     
     filepath = os.path.join(results_dir, filename)
     return pd.read_csv(filepath)
