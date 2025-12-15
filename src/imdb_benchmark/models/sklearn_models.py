@@ -35,7 +35,6 @@ def get_logistic_regression(
         C=C,
         max_iter=max_iter,
         random_state=random_state,
-        n_jobs=-1,
         **kwargs
     )
 
